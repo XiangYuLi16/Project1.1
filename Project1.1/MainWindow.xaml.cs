@@ -34,7 +34,7 @@ namespace Project1._1
 
             if (int.TryParse(numberTextBox.Text, out int value)) // Set a limit for the height
             {
-                int maxValue = 250;
+                int maxValue = 250;    //This sets the height limit to 250 which is within the window size
                 numberTextBox.Text = Math.Min(value, maxValue).ToString();
             }
             else
@@ -45,6 +45,32 @@ namespace Project1._1
         }
 
         private void numberTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !int.TryParse(e.Text, out int result);
+        }
+
+        //Area
+        private void numberArea_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (int.TryParse(numberArea.Text, out int result))
+            {
+                myRec.Height = result + 100;    //The +100 behind sets a default height of 100 for the rectangle
+                myRec.Width = result + 100;    //The +100 behind sets a default width of 100 for the rectangle
+            }
+
+            if (int.TryParse(numberArea.Text, out int value)) // Set a limit for the Area
+            {
+                int maxValue = 250;    //This sets the height limit to 250 which is within the window size
+                numberArea.Text = Math.Min(value, maxValue).ToString();
+            }
+            else
+            {
+                // Handle non-numeric input
+                numberArea.Text = "0";
+            }
+        }
+
+        private void numberArea_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !int.TryParse(e.Text, out int result);
         }
